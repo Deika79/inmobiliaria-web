@@ -23,6 +23,9 @@ $resultado = $conn->query($sql);
 <head>
     <meta charset="UTF-8">
     <title>Listado de pisos</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
 
@@ -34,24 +37,23 @@ $resultado = $conn->query($sql);
     <button type="submit">Buscar</button>
 </form>
 
-<hr>
-
 <?php
 if ($resultado->num_rows > 0) {
     while($piso = $resultado->fetch_assoc()) {
-        echo "<hr>";
+
+        echo "<div class='piso'>";
+
         echo "<h3>" . $piso['calle'] . " " . $piso['numero'] . "</h3>";
-        echo "Piso: " . $piso['piso'] . " - Puerta: " . $piso['puerta'] . "<br>";
-        echo "CP: " . $piso['cp'] . "<br>";
-        echo "Metros: " . $piso['metros'] . " m²<br>";
-        echo "Zona: " . $piso['zona'] . "<br>";
-        echo "Precio: " . $piso['precio'] . " €<br>";
 
         if (!empty($piso['imagen'])) {
-            echo "<img src='../assets/img/" . $piso['imagen'] . "' width='200'><br>";
+            echo "<img src='../assets/img/" . $piso['imagen'] . "'>";
         }
 
-        /* BOTÓN COMPRAR SOLO PARA COMPRADORES */
+        echo "<p><strong>Zona:</strong> " . $piso['zona'] . "</p>";
+        echo "<p><strong>Metros:</strong> " . $piso['metros'] . " m²</p>";
+        echo "<p><strong>Precio:</strong> " . $piso['precio'] . " €</p>";
+
+        /* BOTÓN COMPRAR */
         if (isset($_SESSION['usuario_id']) && $_SESSION['tipo'] == 'comprador') {
             echo "<form action='comprar.php' method='POST'>";
             echo "<input type='hidden' name='codigo_piso' value='" . $piso['codigo_piso'] . "'>";
@@ -59,9 +61,11 @@ if ($resultado->num_rows > 0) {
             echo "<button type='submit'>Comprar</button>";
             echo "</form>";
         }
+
+        echo "</div>";
     }
 } else {
-    echo "No hay pisos disponibles";
+    echo "<p style='text-align:center;'>No hay pisos disponibles</p>";
 }
 ?>
 
