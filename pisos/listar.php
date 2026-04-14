@@ -1,8 +1,19 @@
 <?php
 include("../config/db.php");
 
-/* CONSULTAR PISOS */
-$sql = "SELECT * FROM pisos";
+/* CONSULTA DINÁMICA */
+$sql = "SELECT * FROM pisos WHERE 1=1";
+
+if (!empty($_GET['zona'])) {
+    $zona = $_GET['zona'];
+    $sql .= " AND zona LIKE '%$zona%'";
+}
+
+if (!empty($_GET['precio_max'])) {
+    $precio = $_GET['precio_max'];
+    $sql .= " AND precio <= $precio";
+}
+
 $resultado = $conn->query($sql);
 ?>
 
@@ -15,6 +26,14 @@ $resultado = $conn->query($sql);
 <body>
 
 <h1>Listado de pisos</h1>
+
+<form method="GET">
+    <input type="text" name="zona" placeholder="Zona">
+    <input type="number" name="precio_max" placeholder="Precio máximo">
+    <button type="submit">Buscar</button>
+</form>
+
+<hr>
 
 <?php
 if ($resultado->num_rows > 0) {
