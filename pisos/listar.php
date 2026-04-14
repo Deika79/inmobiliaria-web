@@ -1,4 +1,5 @@
 <?php
+session_start();
 include("../config/db.php");
 
 /* CONSULTA DINÁMICA */
@@ -48,6 +49,15 @@ if ($resultado->num_rows > 0) {
 
         if (!empty($piso['imagen'])) {
             echo "<img src='../assets/img/" . $piso['imagen'] . "' width='200'><br>";
+        }
+
+        /* BOTÓN COMPRAR SOLO PARA COMPRADORES */
+        if (isset($_SESSION['usuario_id']) && $_SESSION['tipo'] == 'comprador') {
+            echo "<form action='comprar.php' method='POST'>";
+            echo "<input type='hidden' name='codigo_piso' value='" . $piso['codigo_piso'] . "'>";
+            echo "<input type='hidden' name='precio' value='" . $piso['precio'] . "'>";
+            echo "<button type='submit'>Comprar</button>";
+            echo "</form>";
         }
     }
 } else {
