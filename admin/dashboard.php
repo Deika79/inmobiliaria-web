@@ -8,4 +8,7 @@ if (!isset($_SESSION['usuario_id']) || $_SESSION['tipo'] != 'admin') {
 ?>
 
 <h1>Panel de administrador</h1>
+<br><br>
+<a href="usuarios.php">Gestionar usuarios</a><br>
+<a href="pisos.php">Gestionar pisos</a>
 <a href="../logout.php">Cerrar sesión</a>
