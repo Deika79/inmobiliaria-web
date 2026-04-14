@@ -18,7 +18,7 @@ if (!isset($_SESSION['usuario_id']) || $_SESSION['tipo'] != 'vendedor') {
 
 <h1>Crear nuevo piso</h1>
 
-<form action="guardar.php" method="POST">
+<form action="guardar.php" method="POST" enctype="multipart/form-data">
     <input type="text" name="calle" placeholder="Calle" required><br><br>
     <input type="number" name="numero" placeholder="Número" required><br><br>
     <input type="number" name="piso" placeholder="Piso" required><br><br>
@@ -27,6 +27,7 @@ if (!isset($_SESSION['usuario_id']) || $_SESSION['tipo'] != 'vendedor') {
     <input type="number" name="metros" placeholder="Metros" required><br><br>
     <input type="text" name="zona" placeholder="Zona"><br><br>
     <input type="number" name="precio" placeholder="Precio" required><br><br>
+    <input type="file" name="imagen"><br><br>
 
     <button type="submit">Guardar piso</button>
 </form>

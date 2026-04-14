@@ -20,6 +20,8 @@ while($p = $resultado->fetch_assoc()) {
     echo "Calle: " . $p['calle'] . "<br>";
     echo "Precio: " . $p['precio'] . "<br>";
 
+    echo " | <a href='editar_piso.php?id=" . $p['codigo_piso'] . "'>Editar</a>";
+
     echo "<a href='eliminar_piso.php?id=" . $p['codigo_piso'] . "'>Eliminar</a>";
 }
 ?>
