@@ -24,5 +24,6 @@ while($u = $resultado->fetch_assoc()) {
     echo "Tipo: " . $u['tipo_usuario'] . "<br>";
 
     echo "<a href='eliminar_usuario.php?id=" . $u['usuario_id'] . "'>Eliminar</a>";
+    echo " | <a href='editar_usuario.php?id=" . $u['usuario_id'] . "'>Editar</a>";
 }
 ?>
